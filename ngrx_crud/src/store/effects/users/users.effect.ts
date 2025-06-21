@@ -1,7 +1,7 @@
 import { inject, Injectable } from "@angular/core";
 import { TaskService } from "../../../services/task.service";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { addUser, addUserFailure, addUserSuccess, GetAllUsers, GetAllUsersFailure, GetAllUsersSuccess, getUser, getUserFailure, getUserSuccess } from "../../action/user.action";
+import { addUser, addUserFailure, addUserSuccess, deleteUser, deleteUserSuccess, editUser, editUserSuccess, GetAllUsers, GetAllUsersFailure, GetAllUsersSuccess, getUserById, getUserByIdFailure, getUserByIdSuccess } from "../../action/user.action";
 import { catchError, exhaustMap, map, mergeMap, of, switchMap } from "rxjs";
 import { UserService } from "../../../services/user.service";
 import { Users } from "../../../model/task";
@@ -19,7 +19,6 @@ export class UserEffect {
 
   }
 
-
 getAllUsers$ = createEffect(() =>
     this.actions$.pipe(
       ofType(GetAllUsers),
@@ -32,15 +31,14 @@ getAllUsers$ = createEffect(() =>
     )
   );
 
-
 addUser$ = createEffect(() =>
   this.actions$.pipe(
     ofType(addUser),
     switchMap((action) =>
       this.us.addUserAPI(action.payload).pipe(
-        map((res: Users) => addUserSuccess({ payload: res })),
+        map((res: Users) =>
+           addUserSuccess({ payload: res })),
         catchError((err) => {
-          console.error('❌ Add API error:', err);
           return of(addUserFailure());
         })
       )
@@ -48,111 +46,42 @@ addUser$ = createEffect(() =>
   )
 );
 
+getUserById$ = createEffect(() =>
+  this.actions$.pipe(
+    ofType(getUserById),
+    exhaustMap((action) =>
+      this.us.getUserById(action.id).pipe(
+        map((user: Users) => getUserByIdSuccess({ payload: user })),
+        catchError(() => of(getUserByIdFailure()))
+      )
+    )
+  )
+);
 
 
-// getUser$ = createEffect(() =>
-//    return this.actions$.pipe(
-//       ofType(getUser),
-//       exhaustMap((action) =>{return this.us.getUserById(action.id).pipe(
-//           map((data:any) =>{ return getUserSuccess({payload:data}) })),
-//           catchError(() => of(GetAllUsersFailure()))
-//         })
-//       )
-    
-// );
+editUser$ = createEffect(() =>
+  this.actions$.pipe(
+    ofType(editUser),
+    exhaustMap(({ payload }) =>
+      this.us.updateUser(payload).pipe(
+        map(updatedUser => 
+        editUserSuccess({user:updatedUser})
+        )
+      )
+    )
+  )
+);
+
+deleteUser$ = createEffect(() =>
+  this.actions$.pipe(
+    ofType(deleteUser),
+    switchMap(({ id }) =>
+      this.us.deleteUser(id).pipe(
+        map(() => deleteUserSuccess({ id }))
+      )
+    )
+  )
+);
 
 
-// getTask$ = createEffect(() =>
-//   this.actions$.pipe(
-//     ofType(getUser),
-//     exhaustMap((action:any) =>
-//       this.us.getUserById(action.payload.id).pipe(
-//         map((task:any) => getUserSuccess({ payload: task })),
-//         catchError(() => of(getUserFailure()))
-//       )
-//     )
-//   )
-// );
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  // getLoadUsers$=createEffect(()=>{
-  //     return this.actions$.pipe(
-  //         ofType(loadUsers),
-  //         exhaustMap(()=>{
-  //             this.cs.getAllusers().pipe(
-  //                map((item)=>AddUsers({payload:item})) 
-  //             ),
-  //             catchError(()=> of(falilUsers()))
-  //         })
-  //     )
-  // })
-
-  // user.effect.ts
-  
-
-  // loadUsers$ = createEffect(() => {
-  //     return this.actions$.pipe(
-  //         ofType(GetAllUsers),
-  //         exhaustMap(() => this.cs.getAllusers()
-  //           .pipe(
-  //             map((user:any) => getUserSuccess({payload:user})),
-  //             catchError(() => of(falilUsers()))
-  //           ))
-  //     );
-  //   });
-  // addUser$ = createEffect(() => {
-  //   return this.actions$.pipe(
-  //     ofType(AddUsers),
-  //     exhaustMap((action: any) => this.us.addUserAPI(action.payload)
-  //       .pipe(
-  //         map((user: any) => addUserSuccess({ payload: user })),
-  //         catchError(() => of(falilUsers()))
-  //       ))
-  //   );
-  // });
-
-  // user.effect.ts
-
-
-
-  // deleteUser$ = createEffect(() => {
-  //   return this.actions$.pipe(
-  //     ofType(deleteUser),
-  //     exhaustMap((id: any) => this.cs.deleteUser(id)
-  //       .pipe(
-  //         map((user: any) => AddUsers({ payload: user })),
-  //         catchError(() => of(falilUsers()))
-  //       ))
-  //   );
-  // });
-
-  // UpdateUsers$ = createEffect(() => {
-  //   return this.actions$.pipe(
-  //     ofType(UpadateUsers),
-  //     exhaustMap((item: any) => this.cs.editUser({ item })
-  //       .pipe(
-  //         map((user: any) => GetAllUsers()),
-  //         catchError(() => of(falilUsers()))
-  //       ))
-  //   );
-  // });
 }

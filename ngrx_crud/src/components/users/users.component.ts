@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { AddEditUsersComponent } from '../add-edit-users/add-edit-users.component';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { Users } from '../../model/task';
 import { CommonModule } from '@angular/common';
 import { selectUserList, selectUsers } from '../../store/selector/task.selector';
-import { deleteUser, GetAllUsers, getUser } from '../../store/action/user.action';
+import { deleteUser, GetAllUsers, getUserById } from '../../store/action/user.action';
 import { getEmpList } from '../../store/selector/user.selector';
 
 @Component({
@@ -21,15 +21,23 @@ export class UsersComponent {
 
   Users: any = [];
 
-  constructor(private store: Store<{ users: Users[] }>) {
+  constructor(private store: Store<{ users: Users[] }>,
+    private router:Router
+  ) {
+        // this.store.dispatch(GetAllUsers());
 
   }
   ngOnInit() {
     this.store.dispatch(GetAllUsers());
     this.Users$ = this.store.select(getEmpList);
   }
+  onAddUser()
+  {
+    this.router.navigate(['/add-edit-user'])
+  }
   onEditUser(id: any) {
-    this.store.dispatch(getUser({ id: id }))
+    // this.router.navigate(['/add-edit-user', id]);
+    this.store.dispatch(getUserById({ id: id }))
   }
 
   delete(id: any) {
@@ -38,4 +46,5 @@ export class UsersComponent {
     }
     this.store.dispatch(deleteUser({ id: id }))
   }
+  
 }

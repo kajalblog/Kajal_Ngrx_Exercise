@@ -19,13 +19,18 @@ export class UserService {
             headers: { 'Content-Type': 'application/json' },
         });
     }
-    getUserById(Id:number)
-    {
-        return this.http.get<Users>("http://localhost:3000/users"+'/'+Id);
+    getUserById(Id: number) {
+        return this.http.get<Users>("http://localhost:3000/users" + '/' + Id);
     }
-    updateUser(user:Users)
-    {
-        return this.http.put<Users>("http://localhost:3000/users"+'/'+user.id,user);
+
+    updateUser(user: Users): Observable<Users> {
+        return this.http.put<Users>(`http://localhost:3000/users/${user.id}`, user);
     }
+    deleteUser(Id:number |string)
+    {
+        return this.http.delete(`http://localhost:3000/users/${Id}`)
+    }
+
+
 
 }

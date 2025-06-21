@@ -9,6 +9,7 @@
                 <div class="row">
                     <div class="col-12">
                         <label for="">Name</label>
+                        {{userObj.name}}
                         <input type="text" name="" id="" class="form-control" placeholder="Enter User Name" [(ngModel)]="userObj.name">
                     </div>
                      
@@ -24,7 +25,7 @@
                         <div class="btn btn-secondary" (click)="resetUsers()">Reset</div>
                     </div>
                     <div class="col-6 text-center">
-                            <div class="btn btn-primary"  (click)="onSaveUsers()">Save</div>
+                            <div class="btn btn-primary"  (click)="onSaveUsers()">{{!editMode?'Add User':'Edit User'}}</div>
 
                         <!-- @if(userObj.id==0)
                         {
