@@ -12,8 +12,10 @@ export const routes: Routes = [
     {path:'edit-task',component:AddEditTaskComponent},
     {path:':edit/:id',component:AddEditTaskComponent},
     {path:'project',component:ProjectComponent},
-    {path:'users',component:UsersComponent},
-{ path: 'add-edit-user', component: AddEditUsersComponent } // ✅ no param
+    {path:'project',component:ProjectComponent},
+    {path:'add-edit-project',component:AddEditProjectComponent},
+{ path: 'add-edit-user', component: AddEditUsersComponent } ,
+{path:'users',component:UsersComponent}
 
 
     

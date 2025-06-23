@@ -24,3 +24,10 @@ email:string
 // {
 
 // }
+
+export interface Project{
+    id:number,
+    name:string,
+    description:string,
+    users:string[]
+}

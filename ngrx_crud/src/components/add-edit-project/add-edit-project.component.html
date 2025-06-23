@@ -1,0 +1,51 @@
+<!-- <div class="container"> -->
+<!-- <div class="row"> -->
+<!-- <div class="col-lg-4"> -->
+<div class="card">
+    <div class="card-header bg-secondary text-white">
+        <h3>Add Project</h3>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-12">
+                <label for="">Name</label>
+                <input type="text" name="" id="" class="form-control" [(ngModel)]="projectObj.name">
+            </div>
+            <div class="col-12">
+                <label for="">Description</label>
+                <textarea class="form-control" rows="3" [(ngModel)]="projectObj.description"></textarea>
+            </div>
+            <div class="col-12">
+                <label for="">Users</label>
+                <!-- <input type="text" name="" id="" class="form-control" [(ngModel)]="onSaveProject.users"> -->
+                <ng-select [virtualScroll]="true" class="custome-s" bindLabel="name" bindValue="id" name="TeamsDropdown"
+                    [(ngModel)]="projectObj.users" [multiple]="true" placeholder="Select Team" [items]="UsersList "
+                    dropdownPosition="bottom">
+
+                </ng-select>
+            </div>
+
+        </div>
+        <div class="row p-2">
+            <div class="col-6 text-center">
+                <div class="btn btn-secondary">Reset</div>
+            </div>
+            <div class="col-6 text-center">
+                <div class="btn btn-primary" (click)="onSaveProject()">Save</div>
+
+                <!-- @if(taskObj.id==0)
+                        {
+
+                            <div class="btn btn-primary"  (click)="onSaveTask()">Save</div>
+                        }
+                        @else{
+                            <div class="btn btn-success"  (click)="onUpdate()">Update</div>
+
+                        } -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- </div> -->
+<!-- </div> -->
+<!-- </div> -->

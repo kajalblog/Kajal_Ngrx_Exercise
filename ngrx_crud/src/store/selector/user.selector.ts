@@ -4,7 +4,7 @@ import { Users } from "../../model/task";
 
 const getUserState = createFeatureSelector<Users[]>('users')
 
-export const getEmpList = createSelector(getUserState, (state) => {
+export const getUserList = createSelector(getUserState, (state) => {
   return state;
 });
 export const selectUserState = (state: any): Users[] => state.user;

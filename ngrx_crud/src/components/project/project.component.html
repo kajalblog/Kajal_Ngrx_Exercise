@@ -1,0 +1,48 @@
+<div class="container p-2">
+    <div class="row">
+        <!-- <div class="col-lg-4">
+            <app-add-edit-project></app-add-edit-project>
+        </div> -->
+
+         <div class="table-header">
+      <h3>Project List</h3>
+      <button (click)="onAddProject()" class=" btn btn-outline-primary">+ Add Project</button>
+    </div>
+    <table class="table align-middle mb-0 bg-white">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Users</th>
+          <th scope="col">Description</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      
+      <tbody class="table-group-divider table-divider-color">
+        @for(item of userData;track $index)
+        {
+        <tr>
+          <th scope="row">{{$index +1}}</th>
+          <td>{{item.name}}</td>
+           <!-- @for(user of item.users;track $index) -->
+        <!-- { -->
+           <td>{{ getUserNames(item.users) }}</td>
+
+<!--  -->
+        <!-- } -->
+          <td>{{item.description}}</td>
+          <td>
+            <a class="card-link"> <a class="btn btn-outline-success m-2" [routerLink]="['/add-edit-project']"
+                [queryParams]="{ id: item.id }" >Edit</a>
+            </a>
+
+            <button class="btn btn-outline-danger" (click)="delete(item.id)">Delete</button>
+          </td>
+        </tr>
+        }
+
+      </tbody>
+    </table>
+    </div>
+</div>

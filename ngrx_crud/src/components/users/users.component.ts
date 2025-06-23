@@ -7,7 +7,7 @@ import { Users } from '../../model/task';
 import { CommonModule } from '@angular/common';
 import { selectUserList, selectUsers } from '../../store/selector/task.selector';
 import { deleteUser, GetAllUsers, getUserById } from '../../store/action/user.action';
-import { getEmpList } from '../../store/selector/user.selector';
+import { getUserList } from '../../store/selector/user.selector';
 
 @Component({
   selector: 'app-users',
@@ -19,7 +19,7 @@ export class UsersComponent {
 
   Users$?: Observable<Users[]>;
 
-  Users: any = [];
+  // Users: any = [];
 
   constructor(private store: Store<{ users: Users[] }>,
     private router:Router
@@ -29,7 +29,8 @@ export class UsersComponent {
   }
   ngOnInit() {
     this.store.dispatch(GetAllUsers());
-    this.Users$ = this.store.select(getEmpList);
+    this.Users$ = this.store.select(getUserList);
+    console.log(this.Users$)
   }
   onAddUser()
   {

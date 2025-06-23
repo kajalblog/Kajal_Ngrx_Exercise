@@ -11,16 +11,19 @@ import { Tasks } from '../model/task';
 import { TaskReducer } from '../store/reducer/task.reducer';
 import { UserEffect } from '../store/effects/users/users.effect';
 import { UserReducer } from '../store/reducer/user.reducer';
+import { ProjectReducer } from '../store/reducer/project.reducer';
+import { ProjectEffect } from '../store/effects/project.effect';
 
 export const appConfig: ApplicationConfig = {
   providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes),
     provideHttpClient(),
     provideStore({
       task:TaskReducer,
-      users:UserReducer
+      users:UserReducer,
+      projects:ProjectReducer
     }
     ),
-    provideEffects(TaskEffectService,UserEffect),
+    provideEffects(TaskEffectService,UserEffect,ProjectEffect),
     provideStoreDevtools({
       maxAge: 25, // Retains last 25 states
       logOnly: !isDevMode(), // Restrict extension to log-only mode

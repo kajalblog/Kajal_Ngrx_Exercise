@@ -15,9 +15,9 @@ export const UserReducer = createReducer(
   on(getUserByIdSuccess, (state, action) => {
     return [action.payload];
   }),
-  on(editUserSuccess, (state, { user }) =>
-    state.map(t => t.id == user.id ? { ...t, ...user } : t)
-  ),
+  // on(editUserSuccess, (state, { user }) =>
+  //   state.map(t => t.id == user.id ? { ...t, ...user } : t)
+  // ),
   // on(editUserSuccess, (state, { user }) => {
   // return state.map(user =>
   //   user.id === user.id ? user : user
