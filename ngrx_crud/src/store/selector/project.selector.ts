@@ -6,6 +6,7 @@ import { Project, Users } from "../../model/task";
 
 const getProjects = createFeatureSelector<Project[]>('projects')
 export const selectUserState = createFeatureSelector<Users[]>('users');
+
 export const getProjectList = createSelector(getProjects, (state) => {
   return state;
 });

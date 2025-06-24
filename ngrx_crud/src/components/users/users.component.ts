@@ -5,7 +5,6 @@ import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { Users } from '../../model/task';
 import { CommonModule } from '@angular/common';
-import { selectUserList, selectUsers } from '../../store/selector/task.selector';
 import { deleteUser, GetAllUsers, getUserById } from '../../store/action/user.action';
 import { getUserList } from '../../store/selector/user.selector';
 
@@ -30,7 +29,6 @@ export class UsersComponent {
   ngOnInit() {
     this.store.dispatch(GetAllUsers());
     this.Users$ = this.store.select(getUserList);
-    console.log(this.Users$)
   }
   onAddUser()
   {

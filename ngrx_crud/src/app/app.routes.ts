@@ -9,8 +9,8 @@ import { AddEditUsersComponent } from '../components/add-edit-users/add-edit-use
 export const routes: Routes = [
     {path:'',redirectTo:'users',pathMatch:'full'},
     {path:'task',component:TaskComponent},
-    {path:'edit-task',component:AddEditTaskComponent},
-    {path:':edit/:id',component:AddEditTaskComponent},
+    {path:'add-edit-task',component:AddEditTaskComponent},
+    // {path:':edit/:id',component:AddEditTaskComponent},
     {path:'project',component:ProjectComponent},
     {path:'project',component:ProjectComponent},
     {path:'add-edit-project',component:AddEditProjectComponent},

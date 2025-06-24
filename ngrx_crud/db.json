@@ -5,14 +5,35 @@
       "title": "test",
       "description": "demo",
       "tags": "tag1",
-      "duration": ""
+      "duration": "",
+      "project": "881146",
+      "users": [
+        "263375"
+      ],
+      "status": "Inprogress",
+      "priority": "Low"
     },
     {
-      "id": "2",
-      "title": "Kajal",
-      "description": "test",
-      "tags": "",
-      "duration": ""
+      "id": "374604",
+      "title": "CP task",
+      "description": "make changes for table view",
+      "project": "111774",
+      "users": [
+        "537130"
+      ],
+      "priority": "High",
+      "status": "Inprogress"
+    },
+    {
+      "id": "615173",
+      "status": "Inprogress",
+      "title": "NGRX CRUD Test",
+      "description": "Create NGRX Crud with using effect concept Completed",
+      "project": "934729",
+      "users": [
+        "11"
+      ],
+      "priority": "Medium"
     }
   ],
   "users": [
@@ -21,12 +42,57 @@
       "name": "kajal",
       "email": "kajal@gmail.com"
     },
-    
     {
-      "id": 399506,
-      "name": "Kangana",
-      "email": "kangana234@gmail.com"
+      "id": "760998",
+      "name": "Ajay",
+      "email": "ajay@gmail.com"
+    },
+    {
+      "id": "537130",
+      "name": "Akshay",
+      "email": "akshay@gmail.com"
+    },
+    {
+      "id": "263375",
+      "name": "Dhruvil",
+      "email": "dhruvil@gmail.com"
+    },
+    {
+      "id": "470221",
+      "name": "Raman 123",
+      "email": "raman@gmail.com"
+    },
+    {
+      "id": "145547",
+      "name": "Rashmi123",
+      "email": "rashmi@gmail.com"
     }
   ],
-  "projects": []
+  "projects": [
+    {
+      "id": "934729",
+      "name": "CRM Web",
+      "description": "CRM web frontend team",
+      "users": [
+        "11",
+        "760998"
+      ]
+    },
+    {
+      "id": "881146",
+      "name": "ERP",
+      "description": "erp test",
+      "users": [
+        "263375"
+      ]
+    },
+    {
+      "id": "111774",
+      "name": "Test Project 11",
+      "description": "demo...",
+      "users": [
+        "537130"
+      ]
+    }
+  ]
 }

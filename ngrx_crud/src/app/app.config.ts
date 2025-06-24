@@ -6,7 +6,7 @@ import {provideStoreDevtools} from '@ngrx/store-devtools'
 
 import { routes } from './app.routes';
 import { provideHttpClient } from '@angular/common/http';
-import { TaskEffectService } from '../store/effects/task-effect.effect';
+import { TaskEffect } from '../store/effects/task-effect.effect';
 import { Tasks } from '../model/task';
 import { TaskReducer } from '../store/reducer/task.reducer';
 import { UserEffect } from '../store/effects/users/users.effect';
@@ -18,12 +18,12 @@ export const appConfig: ApplicationConfig = {
   providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes),
     provideHttpClient(),
     provideStore({
-      task:TaskReducer,
+      tasks:TaskReducer,
       users:UserReducer,
       projects:ProjectReducer
     }
     ),
-    provideEffects(TaskEffectService,UserEffect,ProjectEffect),
+    provideEffects(TaskEffect,UserEffect,ProjectEffect),
     provideStoreDevtools({
       maxAge: 25, // Retains last 25 states
       logOnly: !isDevMode(), // Restrict extension to log-only mode

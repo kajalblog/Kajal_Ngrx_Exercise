@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Tasks } from '../model/task';
-import { TaskAction } from '../store/action/task.action';
+import { getAllProject, TaskAction } from '../store/action/task.action';
+import { GetAllUsers } from '../store/action/user.action';
 
 @Component({
   selector: 'app-root',
@@ -21,6 +22,9 @@ export class AppComponent {
   ngOnInit()
   {
     // this.store.dispatch(TaskAction.loadAllTask())
+    // this.store.dispatch(getAllProject());   // ✅ must be done
+  // this.store.dispatch(GetAllUsers()); 
+
 
   }
 }

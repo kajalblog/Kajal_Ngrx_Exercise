@@ -1,9 +1,14 @@
  export interface Tasks {
-    id?:number,
+    id:string,
     title:string,
     description:string,
-    tags:string,
-    duration:string
+    project:string,
+    users:string[],
+    priority:string,
+    status:string,
+    projectName:string[],
+    
+    // duedate:string
 }
 
 // export class Tasks implements Task {

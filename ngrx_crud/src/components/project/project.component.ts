@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { AddEditProjectComponent } from '../add-edit-project/add-edit-project.component';
 import { CommonModule } from '@angular/common';
 import { Observable } from 'rxjs';
-import { Project, Users } from '../../model/task';
+import { Project } from '../../model/task';
 import { Router, RouterLink } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { deletePRoject, getAllProject } from '../../store/action/project.action';
