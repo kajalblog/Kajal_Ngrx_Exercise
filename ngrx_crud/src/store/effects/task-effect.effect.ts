@@ -43,7 +43,7 @@ export class TaskEffect {
 getAllTask$ = createEffect(() =>
     this.actions$.pipe(
       ofType(GetAllTask),
-      mergeMap(() =>
+      exhaustMap(() =>
         this.cs.fetchAllTasks().pipe(
           map((tasks: Tasks[]) => getAllTaskSuccess({ payload: tasks })),
           catchError(() => of(GetAllTaskFailure()))
@@ -55,7 +55,7 @@ getAllTask$ = createEffect(() =>
 addTask$ = createEffect(() =>
   this.actions$.pipe(
     ofType(addToTask),
-    switchMap((action) =>
+    mergeMap((action) =>
       this.cs.addTaskAPI(action.payload).pipe(
         map((res: Tasks) =>
            addTaskSuccess({ payload: res })),
@@ -91,7 +91,7 @@ addTask$ = createEffect(() =>
 editTask$ = createEffect(() =>
   this.actions$.pipe(
     ofType(editTask),
-    exhaustMap(({ payload }) =>
+    switchMap(({ payload }) =>
       this.cs.editTaskAPI(payload).pipe(
         map(updatedUser => 
         editTaskSuccess({task:updatedUser})
@@ -133,7 +133,7 @@ getTask$ = createEffect(() =>
 deleteTask$ = createEffect(() =>
   this.actions$.pipe(
     ofType(deleteTask),
-    switchMap(({ id }) =>
+    mergeMap(({ id }) =>
       this.cs.deleteTask(id).pipe(
         map(() => deleteTaskSuccess({ id }))
       )

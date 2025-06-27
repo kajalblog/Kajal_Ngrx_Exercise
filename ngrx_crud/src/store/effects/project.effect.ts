@@ -22,7 +22,7 @@ export class ProjectEffect{
    getProject$ = createEffect(() =>
   this.actions$.pipe(
     ofType(getAllProject),
-    mergeMap(() =>
+    exhaustMap(() =>
       this.ps.getAllProject().pipe(
         map((data: Project[]) => getAllProjectSuccess({ payload: data }))
       )
@@ -34,7 +34,7 @@ export class ProjectEffect{
 addProject$=createEffect(()=>{
    return this.actions$.pipe(
         ofType(addProject),
-        switchMap((action)=>this.ps.addProjectAPI(action.payload).pipe(
+        mergeMap((action)=>this.ps.addProjectAPI(action.payload).pipe(
             map((res:Project)=>addProjectSuccess({payload:res}))
         ))
     )
@@ -43,7 +43,7 @@ addProject$=createEffect(()=>{
 editProject$ = createEffect(() =>
    this.actions$.pipe(
     ofType(editProject),
-    exhaustMap(({ payload }) =>
+    switchMap(({ payload }) =>
       this.ps.updateProject(payload).pipe(
         map(updatedProject => 
         editProjectSuccess({project:updatedProject})
@@ -56,7 +56,7 @@ editProject$ = createEffect(() =>
 deleteProject$ = createEffect(() =>
   this.actions$.pipe(
     ofType(deletePRoject),
-    switchMap(({ id }) =>
+    mergeMap(({ id }) =>
       this.ps.deleteProject(id).pipe(
         map(() => deleteProjectSuccess({ id }))
       )

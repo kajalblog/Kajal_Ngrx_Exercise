@@ -10,14 +10,14 @@ export const UserReducer = createReducer(
     return [...action.payload];
   }),
   on(addUserSuccess, (state, action) => {
-    return [...state, action.payload]; // Add new user to existing state
+    return [ action.payload]; // Add new user to existing state
   }),
   on(getUserByIdSuccess, (state, action) => {
     return [action.payload];
   }),
-  // on(editUserSuccess, (state, { user }) =>
-  //   state.map(t => t.id == user.id ? { ...t, ...user } : t)
-  // ),
+  on(editUserSuccess, (state, { user }) =>
+    state.map(t => t.id == user.id ? { ...t, ...user } : t)
+  ),
   // on(editUserSuccess, (state, { user }) => {
   // return state.map(user =>
   //   user.id === user.id ? user : user

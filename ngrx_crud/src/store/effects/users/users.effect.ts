@@ -22,7 +22,7 @@ export class UserEffect {
 getAllUsers$ = createEffect(() =>
     this.actions$.pipe(
       ofType(GetAllUsers),
-      mergeMap(() =>
+      exhaustMap(() =>
         this.us.getAllUsers().pipe(
           map((users: Users[]) => GetAllUsersSuccess({ payload: users })),
           catchError(() => of(GetAllUsersFailure()))
@@ -34,7 +34,7 @@ getAllUsers$ = createEffect(() =>
 addUser$ = createEffect(() =>
   this.actions$.pipe(
     ofType(addUser),
-    switchMap((action) =>
+    mergeMap((action) =>
       this.us.addUserAPI(action.payload).pipe(
         map((res: Users) =>
            addUserSuccess({ payload: res })),
@@ -62,7 +62,7 @@ getUserById$ = createEffect(() =>
 editUser$ = createEffect(() =>
   this.actions$.pipe(
     ofType(editUser),
-    exhaustMap(({ payload }) =>
+    switchMap(({ payload }) =>
       this.us.updateUser(payload).pipe(
         map(updatedUser => 
         editUserSuccess({user:updatedUser})
@@ -75,7 +75,7 @@ editUser$ = createEffect(() =>
 deleteUser$ = createEffect(() =>
   this.actions$.pipe(
     ofType(deleteUser),
-    switchMap(({ id }) =>
+    mergeMap(({ id }) =>
       this.us.deleteUser(id).pipe(
         map(() => deleteUserSuccess({ id }))
       )
